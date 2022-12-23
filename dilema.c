@@ -252,25 +252,6 @@ void calculo_ci_investimento(double  *investimento, int state[N], double gama)
 	}
 }
 /********************************************************************
-***                  distribuição do comprometimento              ***
-********************************************************************/
-void calculo_ci_commitment(double  *commitment, int state[N])
-{	
-	int i;
-	for(i=0;i<N;i++)
-	{
-		double a = gsl_rng_uniform(rand_vec);
-
-		if(a <= 0.5){commitment[i] = 1 ;}
-		else{commitment[i] = 0 ;}
-
-		//if(state[i] == 0){investimento[i] = 0;}
-		//if(state[i] == 1){investimento[i] = 1 ;}
-		//if(state[i] == 2){investimento[i] = 2 ;}		
-
-	}
-}
-/********************************************************************
 ***           		          pool do grupo                       ***
 ********************************************************************/
 void calculo_pool( int state[N], int sitio2, int sitio, int vizinho, int **viz, int topologia[N], double *investimento, double *commitment)
@@ -425,23 +406,6 @@ void calculo_payoff ( double *payoff, double r, double gama, double delta, int x
 	payoff[COOPERATOR] = pool - investimento[y];
 	payoff[PUNISHER]   = pool - investimento[y]; // - gama*nd;
 	payoff[DEFECTOR]   = pool - investimento[y]; // - delta*np;
-
-	//corrupçao com propina
-	/*double pool = (r/topologia[x])*(nc+np);
-
-	payoff[COOPERATOR] = pool - (r/topologia[x])*gama*np + delta*gama*np/nc;
-	payoff[DEFECTOR]   = pool - (r/topologia[x])*gama*np;
-	
-	if(nc==0)
-	{
-	payoff[PUNISHER]   = pool - (r/topologia[x])*gama*np + (1)*gama;
-	}
-	else
-	{
-	payoff[PUNISHER]   = pool - (r/topologia[x])*gama*np + (1-delta)*gama;
-	}*/
-	
-	
 
 	#endif
 	
